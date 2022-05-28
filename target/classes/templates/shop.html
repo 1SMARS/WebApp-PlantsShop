@@ -1,0 +1,120 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        .nav-link {
+            font-size: 15px;
+            color: black;
+            font-family: "Poppins", Arial, sans-serif;
+        }
+
+        .navbar-brand {
+            color: #000;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .wysiwyg p {
+            font-family: "Poppins", Arial, sans-serif;
+
+        }
+
+        #active-item {
+            color: orangered;
+        }
+
+        .nav-item a:hover {
+            color: orangered !important;
+            transition: .5s;
+        }
+
+    </style>
+
+    <title>Home page</title>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-lg navbar-light bg-white shadow-sm mb-3">
+    <div class="container py-3">
+        <a class="navbar-brand" href="#">Plants Shop</a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+
+                <li class="nav-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                    <a class="nav-link" href="#" th:href="@{/admin/products}">Add product</a>
+                </li>
+                <li class="nav-item px-5" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                    <a class="nav-link" href="#" th:href="@{/admin/categories}">Add category</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-5" id="active-item" th:href="@{/shop}" href="#">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">Logout</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link pl-5" th:href="@{/cart}" href="#">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link" th:text="${cartCount}">0</span>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container" style="margin-top: 30px">
+    <div class="row">
+        <div class="col-sm-3">
+            <br>
+            <ul class="list-group">
+                <a th:href="@{/shop}"><li class="list-group-item" style="font-weight: bold; color: black;">All Products</li></a>
+                <a href="" th:each="category, iStat : ${categories}"
+                   th:href="@{/shop/category/{id}(id=${category.id})}"><li
+                        class="list-group-item" th:text="${category.name}" style="font-weight: bold; color: black"></li></a>
+
+            </ul>
+        </div>
+        <div class="col-sm-9">
+            <div class="card" style="margin-top: 20px" th:each="product : ${products}">
+                <div class="row no-gutters">
+                    <div class="col-sm-5 d-flex justify-content-center">
+                        <img class="center" height="200px" width="200px" th:src="@{${'/productImages/' + product.imageName}}" th:alt="${product.name}">
+                    </div>
+                    <div class="col-sm-7 d-flex justify-content-center">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${product.name}"></h5>
+                            <h4>$ <span th:text="${product.price}"></span></h4>
+                            <p th:text="${product.description}" >Suresh Dasari is a founder and technical lead developer in tutlane.</p>
+                            <a href="#" th:href="@{/shop/viewproduct/{id}(id=${product.id})}" class="btn" style="background: black; color: white">View Product</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+</html>

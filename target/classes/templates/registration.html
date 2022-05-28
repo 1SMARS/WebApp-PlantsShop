@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Registration</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+	<style>
+		body {
+			color: #fff;
+			font-family: Varela Round, sans-serif;
+		}
+		.form-control {
+			min-height: 38px;
+			padding-left: 5px;
+			box-shadow: none !important;
+			border-width: 0 0 1px 0;
+			border-radius: 0;
+		}
+		.form-control:focus {
+			border-color: #70c5c0;
+		}
+		.form-control, .btn {
+			border-radius: 2px;
+		}
+		.login-form {
+			width: 380px;
+			margin: 0 auto;
+			padding: 100px 0 30px;
+		}
+		.login-form form {
+			color: #7a7a7a;
+			border-radius: 2px;
+			margin-bottom: 15px;
+			font-size: 13px;
+			background: white;
+			box-shadow: 0 2px 3px rgba(9, 9, 9, 0.3);
+			padding: 30px;
+			position: relative;
+		}
+		.login-form h2 {
+			font-size: 26px;
+			margin: 35px 0 25px;
+			color: #1d1c1c;
+			line-height: 1.5;
+		}
+
+		.login-form .btn, .login-form .btn:active {
+			font-size: 16px;
+			font-weight: bold;
+			background: black !important;
+			border: none;
+			margin-bottom: 20px;
+		}
+		.login-form .btn:hover, .login-form .btn:focus {
+			background: black !important;
+		}
+		.login-form a {
+			color: #fff;
+			text-decoration: underline;
+		}
+
+		.login-form a:hover {
+			text-decoration: none;
+		}
+		.login-form form a {
+			color: #7a7a7a;
+			text-decoration: none;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="login-form">
+		<form th:action="@{/registration}" method="post" th:object="${user}">
+			<div th:if="${param.success}">
+				<div class="alert alert-info">You've successfully registered
+					to our app!</div>
+			</div>
+			<h2 class="text-center">Registration</h2>
+			<div class="form-group">
+				<input id="firstName" placeholder="Firstname" class="form-control" th:field="*{firstName}"
+					   required autofocus="autofocus" />
+			</div>
+			<div class="form-group">
+				<input id="lastName" placeholder="Lastname" class="form-control" th:field="*{lastName}"
+					   required autofocus="autofocus" />
+			</div>
+			<div class="form-group">
+				<input id="email" placeholder="Email" class="form-control" th:field="*{email}" required
+					autofocus="autofocus" />
+			</div>
+			<div class="form-group">
+				<input id="password" placeholder="Password" class="form-control" type="password"
+					th:field="*{password}" required autofocus="autofocus" />
+			</div>
+			<div class="form-group">
+				<input type="submit" name="login-submit" id="login-submit" class="btn btn-primary btn-lg btn-block" value="Register"/>
+			</div>
+
+			<div class="form-group">
+				<span>Already registered? <a href="/" th:href="@{/login}">Login here</a></span>
+			</div>
+		</form>
+	</div>
+
+</body>
+</html>

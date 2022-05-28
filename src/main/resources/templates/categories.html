@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+    .nav-item {
+        font-size: 15px;
+        color: black;
+        font-family: "Poppins", Arial, sans-serif;
+    }
+
+    .navbar-brand {
+        color: #000;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+    .wysiwyg p {
+        font-family: "Poppins", Arial, sans-serif;
+
+    }
+    .nav-item a:hover {
+        color: orangered !important;
+        transition: .5s;
+    }
+
+    #active-item {
+        color: orangered;
+    }
+
+</style>
+
+<title>Categories</title>
+</head>
+    <body>
+    <nav class="navbar navbar-expand-lg navbar-lg navbar-light bg-white shadow-sm mb-3">
+        <div class="container py-3">
+            <a class="navbar-brand" href="#">Plants Shop</a>
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+
+                    <li class="nav-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                        <a class="nav-link" href="#" th:href="@{/admin/products}">Add product</a>
+                    </li>
+                    <li class="nav-item px-5" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                        <a class="nav-link" id="active-item" href="#" th:href="@{/admin/categories}">Add category</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/}" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-5" th:href="@{/shop}" href="#">Shop</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">Logout</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link pl-5" th:href="@{/cart}" href="#">Cart</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+
+        <a th:href="@{/admin/categories/add}" style="margin: 20px 0" class="btn btn-primary">Add Category</a>
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">SN</th>
+                <th scope="col">Category Name</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Update</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="category, iStat : ${categories}">
+                <th scope="row" th:text="${iStat.index + 1}">1</th>
+                <td th:text="${category.name}">Larry</td>
+                <td><a href="" th:href="@{/admin/categories/delete/{id}(id=${category.id})}" class="btn btn-danger">Delete</a></td>
+                <td><a href="" th:href="@{/admin/categories/update/{id}(id=${category.id})}" class="btn btn-warning">Update</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    </body>
+</html>
