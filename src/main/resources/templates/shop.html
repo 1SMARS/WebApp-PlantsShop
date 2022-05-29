@@ -50,7 +50,7 @@
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 
                 <li class="nav-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
-                    <a class="nav-link" href="#" th:href="@{/admin/products}">Add product</a>
+                    <a class="nav-link" href="#" th:href="@{/admin/products}">Add plant</a>
                 </li>
                 <li class="nav-item px-5" sec:authorize="hasAuthority('ROLE_ADMIN')">
                     <a class="nav-link" href="#" th:href="@{/admin/categories}">Add category</a>
@@ -86,7 +86,7 @@
         <div class="col-sm-3">
             <br>
             <ul class="list-group">
-                <a th:href="@{/shop}"><li class="list-group-item" style="font-weight: bold; color: black;">All Products</li></a>
+                <a th:href="@{/shop}"><li class="list-group-item" style="font-weight: bold; color: black;">All Plants</li></a>
                 <a href="" th:each="category, iStat : ${categories}"
                    th:href="@{/shop/category/{id}(id=${category.id})}"><li
                         class="list-group-item" th:text="${category.name}" style="font-weight: bold; color: black"></li></a>
@@ -103,8 +103,8 @@
                         <div class="card-body">
                             <h5 class="card-title" th:text="${product.name}"></h5>
                             <h4>$ <span th:text="${product.price}"></span></h4>
-                            <p th:text="${product.description}" >Suresh Dasari is a founder and technical lead developer in tutlane.</p>
-                            <a href="#" th:href="@{/shop/viewproduct/{id}(id=${product.id})}" class="btn" style="background: black; color: white">View Product</a>
+                            <p th:text="${product.description}" ></p>
+                            <a href="#" th:href="@{/shop/viewproduct/{id}(id=${product.id})}" class="btn" style="background: black; color: white">View Plant</a>
                         </div>
                     </div>
                 </div>
