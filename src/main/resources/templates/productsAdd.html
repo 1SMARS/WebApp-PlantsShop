@@ -48,7 +48,7 @@
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 
                 <li class="nav-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
-                    <a class="nav-link" id="active-item" href="#" th:href="@{/admin/products}">Add product</a>
+                    <a class="nav-link" id="active-item" href="#" th:href="@{/admin/products}">Add plant</a>
                 </li>
                 <li class="nav-item px-5" sec:authorize="hasAuthority('ROLE_ADMIN')">
                     <a class="nav-link" href="#" th:href="@{/admin/categories}">Add category</a>
@@ -103,12 +103,12 @@
                            placeholder="Price">
                 </div>
                 <div class="form-group">
-                    <label for="description">Product Description</label>
+                    <label for="description">Plant Description</label>
                     <textarea class="form-control" rows="5" th:field="*{description}" name="description" id="description"></textarea>
                 </div>
             </div>
             <div class="col-sm-5">
-                <p>Product Image</p>
+                <p>Plant Image</p>
                 <div class="custom-file">
                     <input type="file"  class="custom-file-input" name="productImage" accept="image/jpeg, image/png"  id="productImage"/>
                     <label class="custom-file-label" for="productImage">Choose file</label>
