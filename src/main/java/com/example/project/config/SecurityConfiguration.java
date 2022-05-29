@@ -45,6 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	                "/css/**",
 	                "/img/**",
 			"/shop",
+			"/shop/category/**,
 			"/",
 			"/productImages/**").permitAll()
 		.anyRequest().authenticated()
